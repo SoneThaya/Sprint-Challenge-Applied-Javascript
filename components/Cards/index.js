@@ -18,3 +18,60 @@
 // </div>
 //
 // Use your function to create a card for each of the articles and add the card to the DOM.
+const cardsEntryPoint = document.querySelector('.cards-container')
+
+function cardMaker({ headlineArticle, authorsImage, authorsName }) {
+  const cardDiv = document.createElement('div')
+  const cardHeadline = document.createElement('div')
+  const cardAuthor = document.createElement('div')
+  const cardImage = document.createElement('div')
+  const imgAuthor = document.createElement('img')
+  const spanName = document.createElement('span')
+
+  cardDiv.appendChild(cardHeadline)
+  cardDiv.appendChild(cardAuthor)
+  cardAuthor.appendChild(cardImage)
+  cardAuthor.appendChild(spanName)
+  cardImage.appendChild(imgAuthor)
+
+  cardDiv.classList.add('card')
+  cardHeadline.classList.add('headline')
+  cardAuthor.classList.add('author')
+  cardImage.classList.add('img-container')
+
+  cardHeadline.textContent = headlineArticle
+  imgAuthor.src = authorsImage
+  spanName.textContent = authorsName
+  
+  return cardDiv
+}
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+  .then(response => {
+    console.log(response)
+    
+    const javascriptArticles = response.data.articles.javascript
+    const bootstrapArticles = response.data.articles.bootstrap
+    const technologyArticles = response.data.articles.technology
+    const jqueryArticles = response.data.articles.jquery
+    const nodeArticles = response.data.articles.node
+    
+
+    const allArticles = [...javascriptArticles, ...bootstrapArticles, ...technologyArticles, ...jqueryArticles, ...nodeArticles]
+    
+    console.log(allArticles)
+
+    allArticles.forEach(item => {
+      const headlineArticle = item.headline
+      const authorsImage = item.authorPhoto
+      const authorsName = item.authorName
+
+      const articleCard = cardMaker({ headlineArticle, authorsImage, authorsName })
+      
+      cardsEntryPoint.appendChild(articleCard)
+    })
+    
+  })
+  .catch(error => {
+    console.log('error')
+  })

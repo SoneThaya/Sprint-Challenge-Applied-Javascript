@@ -23,8 +23,6 @@ function topicTab(topicHere) {
 axios.get('https://lambda-times-backend.herokuapp.com/topics') 
   .then(response => {
     const tabTopic = response.data.topics
-   
-    console.log(tabTopic)
     
     tabTopic.forEach(item => {
       tabEntryPoint.appendChild(topicTab(item))
