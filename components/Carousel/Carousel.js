@@ -17,3 +17,51 @@
     <div class="right-button"> > </div>
   </div>
 */
+const carouselEntryPoint = document.querySelector('.carousel-container')
+
+function carouselMaker() {
+  const carouselDiv = document.createElement('div')
+  const leftButton = document.createElement('div')
+  const imgOne = document.createElement('img')
+  const imgTwo = document.createElement('img')
+  const imgThree = document.createElement('img')
+  const imgFour = document.createElement('img')
+  const rightButton = document.createElement('div')
+
+  carouselDiv.appendChild(leftButton)
+  carouselDiv.appendChild(imgOne)
+  carouselDiv.appendChild(imgTwo)
+  carouselDiv.appendChild(imgThree)
+  carouselDiv.appendChild(imgFour)
+  carouselDiv.appendChild(rightButton)
+
+  carouselDiv.classList.add('carousel')
+  leftButton.classList.add('left-button')
+  rightButton.classList.add('right-button')
+
+  leftButton.textContent = '<'
+  imgOne.src = "./assets/carousel/mountains.jpeg"
+  imgTwo.src = "./assets/carousel/computer.jpeg"
+  imgThree.src = "./assets/carousel/trees.jpeg"
+  imgFour.src = "./assets/carousel/turntable.jpeg"
+  rightButton.textContent = '>'
+
+  const imageArray = [imgOne, imgTwo, imgThree, imgFour]
+
+  console.log(imageArray)
+  
+
+  leftButton.addEventListener('click', event => {
+    let imageIndex = 1
+    imageArray[imageIndex - 1].style.display = ''
+  })
+
+  rightButton.addEventListener('click', event => {
+    let imageIndex = 1
+    imageArray[imageIndex + 1].style.display = ''
+  })
+
+  return carouselDiv
+}
+
+carouselEntryPoint.appendChild(carouselMaker())
