@@ -61,7 +61,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
     
     console.log(allArticles)
 
-    allArticles.forEach(item => {
+    allArticles.forEach(item => { 
       const headlineArticle = item.headline
       const authorsImage = item.authorPhoto
       const authorsName = item.authorName

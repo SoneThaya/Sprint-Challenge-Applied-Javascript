@@ -46,19 +46,62 @@ function carouselMaker() {
   imgFour.src = "./assets/carousel/turntable.jpeg"
   rightButton.textContent = '>'
 
-  const imageArray = [imgOne, imgTwo, imgThree, imgFour]
+  // const imageArray = [imgOne, imgTwo, imgThree, imgFour]
 
-  console.log(imageArray)
+  // console.log(imageArray)
   
 
-  leftButton.addEventListener('click', event => {
-    let imageIndex = 1
-    imageArray[imageIndex - 1].style.display = ''
+  // leftButton.addEventListener('click', event => {
+  //   let imageIndex = 1
+  //   imageArray[imageIndex - 1].style.display = ''
+  // })
+
+  // rightButton.addEventListener('click', event => {
+  //   let imageIndex = 1
+  //   imageArray[imageIndex + 1].style.display = ''
+  // })
+
+  let index = 0;
+
+  const show = event => {
+    index += event;
+
+    if (index >= 5) {
+      index = 1;
+    }
+    if (index <= 0) {
+      index = 4
+    }
+
+    if (index === 1) {
+      imgOne.style.display = 'block';
+      imgTwo.style.display = 'none';
+      imgThree.style.display = 'none';
+      imgFour.style.display = 'none';
+    } else if (index === 2) {
+      imgOne.style.display = 'none';
+      imgTwo.style.display = 'block';
+      imgThree.style.display = 'none';
+      imgFour.style.display = 'none';
+    } else if (index === 3) {
+      imgOne.style.display = 'none';
+      imgTwo.style.display = 'none';
+      imgThree.style.display = 'block';
+      imgFour.style.display = 'none';
+    } else if (index === 4) {
+      imgOne.style.display = 'none';
+      imgTwo.style.display = 'none';
+      imgThree.style.display = 'none';
+      imgFour.style.display = 'block';
+    }
+  }
+
+  leftButton.addEventListener('click', () => {
+    show(-1)
   })
 
-  rightButton.addEventListener('click', event => {
-    let imageIndex = 1
-    imageArray[imageIndex + 1].style.display = ''
+  rightButton.addEventListener('click', () => {
+    show(1)
   })
 
   return carouselDiv
