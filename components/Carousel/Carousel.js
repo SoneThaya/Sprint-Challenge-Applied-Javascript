@@ -17,3 +17,94 @@
     <div class="right-button"> > </div>
   </div>
 */
+const carouselEntryPoint = document.querySelector('.carousel-container')
+
+function carouselMaker() {
+  const carouselDiv = document.createElement('div')
+  const leftButton = document.createElement('div')
+  const imgOne = document.createElement('img')
+  const imgTwo = document.createElement('img')
+  const imgThree = document.createElement('img')
+  const imgFour = document.createElement('img')
+  const rightButton = document.createElement('div')
+
+  carouselDiv.appendChild(leftButton)
+  carouselDiv.appendChild(imgOne)
+  carouselDiv.appendChild(imgTwo)
+  carouselDiv.appendChild(imgThree)
+  carouselDiv.appendChild(imgFour)
+  carouselDiv.appendChild(rightButton)
+
+  carouselDiv.classList.add('carousel')
+  leftButton.classList.add('left-button')
+  rightButton.classList.add('right-button')
+
+  leftButton.textContent = '<'
+  imgOne.src = "./assets/carousel/mountains.jpeg"
+  imgTwo.src = "./assets/carousel/computer.jpeg"
+  imgThree.src = "./assets/carousel/trees.jpeg"
+  imgFour.src = "./assets/carousel/turntable.jpeg"
+  rightButton.textContent = '>'
+
+  // const imageArray = [imgOne, imgTwo, imgThree, imgFour]
+
+  // console.log(imageArray)
+  
+
+  // leftButton.addEventListener('click', event => {
+  //   let imageIndex = 1
+  //   imageArray[imageIndex - 1].style.display = ''
+  // })
+
+  // rightButton.addEventListener('click', event => {
+  //   let imageIndex = 1
+  //   imageArray[imageIndex + 1].style.display = ''
+  // })
+
+  let index = 0;
+
+  const show = event => {
+    index += event;
+
+    if (index >= 5) {
+      index = 1;
+    }
+    if (index <= 0) {
+      index = 4
+    }
+
+    if (index === 1) {
+      imgOne.style.display = 'block';
+      imgTwo.style.display = 'none';
+      imgThree.style.display = 'none';
+      imgFour.style.display = 'none';
+    } else if (index === 2) {
+      imgOne.style.display = 'none';
+      imgTwo.style.display = 'block';
+      imgThree.style.display = 'none';
+      imgFour.style.display = 'none';
+    } else if (index === 3) {
+      imgOne.style.display = 'none';
+      imgTwo.style.display = 'none';
+      imgThree.style.display = 'block';
+      imgFour.style.display = 'none';
+    } else if (index === 4) {
+      imgOne.style.display = 'none';
+      imgTwo.style.display = 'none';
+      imgThree.style.display = 'none';
+      imgFour.style.display = 'block';
+    }
+  }
+
+  leftButton.addEventListener('click', () => {
+    show(-1)
+  })
+
+  rightButton.addEventListener('click', () => {
+    show(1)
+  })
+
+  return carouselDiv
+}
+
+carouselEntryPoint.appendChild(carouselMaker())
